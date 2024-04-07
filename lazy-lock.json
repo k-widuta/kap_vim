@@ -23,6 +23,7 @@
   "editorconfig.nvim": { "branch": "master", "commit": "5b9e303e1d6f7abfe616ce4cc8d3fffc554790bf" },
   "fidget.nvim": { "branch": "main", "commit": "1ba38e4cbb24683973e00c2e36f53ae64da38ef5" },
   "friendly-snippets": { "branch": "main", "commit": "ea068f1becd91bcd4591fceb6420d4335e2e14d3" },
+  "git-worktree.nvim": { "branch": "master", "commit": "f247308e68dab9f1133759b05d944569ad054546" },
   "git.nvim": { "branch": "main", "commit": "6b4a66f8a66e567bf27a0ef1de72cf5e338df4c3" },
   "gitsigns.nvim": { "branch": "main", "commit": "fa052c20aa7cc62ce6a328c7f3bd556c93b5370e" },
   "harpoon": { "branch": "harpoon2", "commit": "da326d0438ac68dee9b6b62a734be940a8bd8405" },

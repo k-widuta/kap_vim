@@ -143,6 +143,15 @@ keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
 keymap.set("n", "<leader>ee", "oif err != nil {<CR>}<Esc>Oreturn err<Esc>")
 
+-- Git worktree
+vim.keymap.set("n", "<leader>gw", function()
+    require("telescope").extensions.git_worktree.git_worktrees()
+end, { desc = "Manage Worktrees " })
+
+vim.keymap.set("n", "<leader>ga", function()
+    require("telescope").extensions.git_worktree.create_git_worktree()
+end, { desc = "Telescope create worktree" })
+
 -- keymap.set("n", "<leader>vpp", "<cmd>e ~/.dotfiles/nvim/.config/nvim/lua/theprimeagen/packer.lua<CR>")
 -- keymap.set("n", "<leader>mr", "<cmd>CellularAutomaton make_it_rain<CR>")
 
