@@ -114,178 +114,37 @@ return {
         --  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
         --  - settings (table): Override the default settings passed when initializing the server.
         --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
-        local servers =
-            {
-                -- clangd = {},
-                gopls = {},
-                pyright = {
-                    capabilities = capabilities,
-                    filetypes = { "python" },
-                    settings = {
-                        python = {
-                            analysis = {
-                                autoSearchPaths = true,
-                                diagnosticMode = "workspace",
-                                useLibraryCodeForTypes = true,
-                                typeCheckingMode = "basic",
-                                stubPath = "/usr/lib/python3.9/site-packages",
-                            },
+        local servers = {
+            -- clangd = {},
+            gopls = {},
+            lua_ls = {
+                -- cmd = {...},
+                -- filetypes = { ...},
+                -- capabilities = {},
+                settings = {
+                    Lua = {
+                        completion = {
+                            callSnippet = "Replace",
                         },
-                    },
-                },
-                rust_analyzer = {},
-                -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
-                --
-                -- Some languages (like typescript) have entire language plugins that can be useful:
-                --    https://github.com/pmizio/typescript-tools.nvim
-                --
-                -- But for many setups, the LSP (`tsserver`) will work just fine
-                cssls = {},
-                tailwindcss = {
-                    root_dir = function(...)
-                        return require("lspconfig.util").root_pattern ".git"(...)
-                    end,
-                },
-                tsserver = {
-                    root_dir = function(...)
-                        return require("lspconfig.util").root_pattern ".git"(...)
-                    end,
-                    single_file_support = false,
-                    settings = {
-                        typescript = {
-                            inlayHints = {
-                                includeInlayParameterNameHints = "literal",
-                                includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-                                includeInlayFunctionParameterTypeHints = true,
-                                includeInlayVariableTypeHints = false,
-                                includeInlayPropertyDeclarationTypeHints = true,
-                                includeInlayFunctionLikeReturnTypeHints = true,
-                                includeInlayEnumMemberValueHints = true,
-                            },
-                        },
-                        javascript = {
-                            inlayHints = {
-                                includeInlayParameterNameHints = "all",
-                                includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-                                includeInlayFunctionParameterTypeHints = true,
-                                includeInlayVariableTypeHints = true,
-                                includeInlayPropertyDeclarationTypeHints = true,
-                                includeInlayFunctionLikeReturnTypeHints = true,
-                                includeInlayEnumMemberValueHints = true,
-                            },
-                        },
-                    },
-                },
-                html = {},
-                yamlls = {
-                    settings = {
-                        yaml = {
-                            keyOrdering = false,
-                        },
-                    },
-                },
-                lua_ls = {
-                    -- enabled = false,
-                    single_file_support = true,
-                    settings = {
-                        Lua = {
-                            workspace = {
-                                checkThirdParty = false,
-                            },
-                            completion = {
-                                workspaceWord = true,
-                                callSnippet = "Both",
-                            },
-                            misc = {
-                                parameters = {
-                                    -- "--log-level=trace",
-                                },
-                            },
-                            hint = {
-                                enable = true,
-                                setType = false,
-                                paramType = true,
-                                paramName = "Disable",
-                                semicolon = "Disable",
-                                arrayIndex = "Disable",
-                            },
-                            doc = {
-                                privateName = { "^_" },
-                            },
-                            type = {
-                                castNumberToInteger = true,
-                            },
-                            diagnostics = {
-                                disable = { "incomplete-signature-doc", "trailing-space" },
-                                -- enable = false,
-                                groupSeverity = {
-                                    strong = "Warning",
-                                    strict = "Warning",
-                                },
-                                groupFileStatus = {
-                                    ["ambiguity"] = "Opened",
-                                    ["await"] = "Opened",
-                                    ["codestyle"] = "None",
-                                    ["duplicate"] = "Opened",
-                                    ["global"] = "Opened",
-                                    ["luadoc"] = "Opened",
-                                    ["redefined"] = "Opened",
-                                    ["strict"] = "Opened",
-                                    ["strong"] = "Opened",
-                                    ["type-check"] = "Opened",
-                                    ["unbalanced"] = "Opened",
-                                    ["unused"] = "Opened",
-                                },
-                                unusedLocalExclude = { "_*" },
-                            },
-                            format = {
-                                enable = false,
-                                defaultConfig = {
-                                    indent_style = "space",
-                                    indent_size = "2",
-                                    continuation_indent_size = "2",
-                                },
-                            },
-                        },
+                        -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
+                        -- diagnostics = { disable = { 'missing-fields' } },
                     },
                 },
             },
-            --     lua_ls = {
-            --         -- cmd = {...},
-            --         -- filetypes = { ...},
-            --         -- capabilities = {},
-            --         settings = {
-            --             Lua = {
-            --                 completion = {
-            --                     callSnippet = "Replace",
-            --                 },
-            --                 -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-            --                 -- diagnostics = { disable = { 'missing-fields' } },
-            --             },
-            --         },
-            --     },
-            -- }
-            -- Ensure the servers and tools above are installed
-            --  To check the current status of installed tools and/or manually install
-            --  other tools, you can run
-            --    :Mason
-            --
-            --  You can press `g?` for help in this menu.
-            require("mason").setup()
+        }
+        -- Ensure the servers and tools above are installed
+        --  To check the current status of installed tools and/or manually install
+        --  other tools, you can run
+        --    :Mason
+        --
+        --  You can press `g?` for help in this menu.
+        require("mason").setup()
 
         -- You can add other tools here that you want Mason to install
         -- for you, so that they are available from within Neovim.
         local ensure_installed = vim.tbl_keys(servers or {})
         vim.list_extend(ensure_installed, {
             "stylua", -- Used to format Lua code
-            "lua_ls",
-            "rust_analyzer",
-            "gopls",
-            "black",
-            "debugpy",
-            "mypy",
-            "ruff-lsp",
-            "pyright",
         })
         require("mason-tool-installer").setup { ensure_installed = ensure_installed }
 

@@ -113,4 +113,37 @@ return {
             table.insert(opts.sources, { name = "emoji" })
         end,
     },
+    -- Delete <tab> binding to use it for copilot
+
+    {
+        "L3MON4D3/LuaSnip",
+        keys = function()
+            return {}
+        end,
+        -- keys = {
+        -- {
+        --     "<S-tab>",
+        --     function()
+        --         return require("luasnip").jumpable(1) and "<Plug>luasnip-jump-next" or "<d-tab>"
+        --     end,
+        --     expr = true,
+        --     silent = true,
+        --     mode = "i",
+        -- },
+        -- {
+        --     "<D-tab>",
+        --     function()
+        --         require("luasnip").jump(1)
+        --     end,
+        --     mode = "s",
+        -- },
+        -- {
+        --     "<A-tab>",
+        --     function()
+        --         require("luasnip").jump(-1)
+        --     end,
+        --     mode = { "i", "s" },
+        -- },
+        -- },
+    },
 }
