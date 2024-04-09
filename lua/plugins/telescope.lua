@@ -74,6 +74,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
                             ["/"] = function()
                                 vim.cmd "startinsert"
                             end,
+                            ["r"] = fb_actions.rename,
                             ["<C-u>"] = function(prompt_bufnr)
                                 for i = 1, 10 do
                                     actions.move_selection_previous(prompt_bufnr)

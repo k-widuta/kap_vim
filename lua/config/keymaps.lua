@@ -5,9 +5,12 @@
 local keymap = vim.keymap
 local opts = { noremap = true, silent = true }
 
+-- My keymaps (from VSCode :())
+--
+
 -- Do things without affecting the registers
 keymap.set("n", "x", '"_x')
-keymap.set("n", "<Leader>p", '"0p')
+keymap.set("n", ",p", '"0p')
 keymap.set("n", "<Leader>P", '"0P')
 keymap.set("v", "<Leader>p", '"0p')
 keymap.set("n", "<Leader>c", '"_c')
@@ -109,13 +112,6 @@ keymap.set("n", "<C-d>", "<C-d>zz")
 keymap.set("n", "<C-u>", "<C-u>zz")
 keymap.set("n", "n", "nzzzv")
 keymap.set("n", "N", "Nzzzv")
-
-keymap.set("n", "<leader>vwm", function()
-    require("with-me").StartVimWithMe()
-end)
-keymap.set("n", "<leader>svwm", function()
-    require("with-me").StopVimWithMe()
-end)
 
 -- greatest remap ever
 keymap.set("x", "<leader>p", [["_dP]])
