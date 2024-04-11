@@ -81,12 +81,13 @@ return {
                 },
                 overrides = {
                     -- The right one but we do it changes everything to white and we do not want that.
-                    -- GruvboxBlue = { fg = "#fffff" },
+                    -- GruvboxBlue = { fg = "#c4a7e7" },
                     GruvboxAqua = { fg = "#fabd2f" },
-                    Operator = { fg = "#8ec07c" },
+                    -- Operator = { fg = "#8ec07c" },
+                    Operator = { fg = "#ffffff" },
                     Function = { fg = "#fabd2f" },
                     -- StorageClass = { fg = "#ffffff" },
-                    -- Special = { fg = "#d65d0e" },
+                    -- Special = { fg = "#f6c177" },
                 },
                 dim_inactive = false,
                 transparent_mode = true,

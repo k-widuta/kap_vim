@@ -122,7 +122,7 @@ keymap.set("n", "<leader>Y", [["+Y]])
 
 keymap.set({ "n", "v" }, "<leader>d", [["_d]])
 
--- This is going to get me cancelled
+-- This is going to ever me cancelled
 keymap.set("i", "<C-c>", "<Esc>")
 
 keymap.set("n", "Q", "<nop>")
@@ -138,7 +138,6 @@ keymap.set("n", "<leader>p", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left
 keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
 keymap.set("n", "<leader>ee", "oif err != nil {<CR>}<Esc>Oreturn err<Esc>")
-
 -- Git worktree
 vim.keymap.set("n", "<leader>gw", function()
     require("telescope").extensions.git_worktree.git_worktrees()
