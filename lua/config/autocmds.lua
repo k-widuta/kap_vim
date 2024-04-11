@@ -3,9 +3,56 @@
 -- Add any additional autocmds here
 
 local augroup = vim.api.nvim_create_augroup
-local ThePrimeagenGroup = augroup("ThePrimeagen", {})
+local kap_auto_magic = augroup("kap_auto_magic", { clear = true })
 
 local autocmd = vim.api.nvim_create_autocmd
+local user_command = vim.api.nvim_create_user_command
+-- MY CUSTOM AUTOCMDS
+--
+--Helper functions
+local function attach_to_buffer(output_buffer_num, pattern, command, file_name)
+    autocmd("BufWritePost", {
+        group = kap_auto_magic,
+        pattern = pattern,
+        -- command = command,
+        callback = function()
+            local append_data = function(_, data)
+                if data then
+                    vim.api.nvim_buf_set_lines(output_buffer_num, -1, -1, false, data)
+                end
+            end
+
+            vim.api.nvim_buf_set_lines(output_buffer_num, 0, -1, false, { string.upper(file_name) .. " output: " })
+            vim.fn.jobstart(command, {
+                stdout_buffered = true,
+                on_stdout = append_data,
+                on_stderr = append_data,
+            })
+        end,
+    })
+end
+--
+-- Autocommands for executing saved file
+user_command("AutoRun", function()
+    print "AutoRun starts now...."
+    local pattern = vim.fn.input "Enter the file pattern: "
+    local command = vim.split(vim.fn.input "Enter the command to run: ", " ")
+    local file_name = command[#command]
+    -- local buff = vim.api.nvim_get_current_buf()
+    -- print(buff or "No buffer")
+    attach_to_buffer(vim.api.nvim_get_current_buf(), pattern, command, file_name)
+end, {})
+
+-- autocmd("BufWritePost", {
+--     group = execute_file,
+--     pattern = "*.py",
+--     command = "silent !python3 %",
+--     callback = function()
+--         print "Executing python file"
+--     end,
+-- })
+
+-- TODO: Add autocommands for running tests
 
 -- Turn off paste mode when leaving insert
 autocmd("InsertLeave", {
@@ -31,11 +78,11 @@ autocmd("TextYankPost", {
         vim.highlight.on_yank()
     end,
 })
-autocmd({ "BufWritePre" }, {
-    group = ThePrimeagenGroup,
-    pattern = "*",
-    command = [[%s/\s\+$//e]],
-})
+-- autocmd({ "BufWritePre" }, {
+--     group = ThePrimeagenGroup,
+--     pattern = "*",
+--     command = [[%s/\s\+$//e]],
+-- })
 
 vim.api.nvim_create_autocmd("LspAttach", {
     group = vim.api.nvim_create_augroup("kickstart-lsp-attach", { clear = true }),
@@ -109,41 +156,3 @@ vim.api.nvim_create_autocmd("LspAttach", {
         end
     end,
 })
-
--- -- Primeagen LspAttach
--- autocmd("LspAttach", {
---   group = ThePrimeagenGroup,
---   callback = function(e)
---     local opts = { buffer = e.buf }
---     vim.keymap.set("n", "gd", function()
---       vim.lsp.buf.definition()
---     end, opts)
---     vim.keymap.set("n", "K", function()
---       vim.lsp.buf.hover()
---     end, opts)
---     vim.keymap.set("n", "<leader>vws", function()
---       vim.lsp.buf.workspace_symbol()
---     end, opts)
---     vim.keymap.set("n", "<leader>vd", function()
---       vim.diagnostic.open_float()
---     end, opts)
---     vim.keymap.set("n", "<leader>vca", function()
---       vim.lsp.buf.code_action()
---     end, opts)
---     vim.keymap.set("n", "<leader>vrr", function()
---       vim.lsp.buf.references()
---     end, opts)
---     vim.keymap.set("n", "<leader>vrn", function()
---       vim.lsp.buf.rename()
---     end, opts)
---     vim.keymap.set("i", "<C-h>", function()
---       vim.lsp.buf.signature_help()
---     end, opts)
---     vim.keymap.set("n", "[d", function()
---       vim.diagnostic.goto_next()
---     end, opts)
---     vim.keymap.set("n", "]d", function()
---       vim.diagnostic.goto_prev()
---     end, opts)
---   end,
--- })
