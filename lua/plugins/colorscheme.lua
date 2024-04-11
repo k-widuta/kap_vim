@@ -5,7 +5,7 @@ return {
         priority = 1000,
         config = function()
             require("gruvbox").setup {
-                terminal_colors = false, -- add neovim terminal colors
+                terminal_colors = true, -- add neovim terminal colors
                 undercurl = true,
                 underline = true,
                 bold = false,
@@ -82,7 +82,7 @@ return {
                 overrides = {
                     -- The right one but we do it changes everything to white and we do not want that.
                     -- GruvboxBlue = { fg = "#fffff" },
-                    -- GruvboxAqua = { fg = "#fabd2f" },
+                    GruvboxAqua = { fg = "#fabd2f" },
                     Operator = { fg = "#8ec07c" },
                     Function = { fg = "#fabd2f" },
                     -- StorageClass = { fg = "#ffffff" },
