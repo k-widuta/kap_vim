@@ -6,7 +6,26 @@ local keymap = vim.keymap
 local opts = { noremap = true, silent = true }
 
 -- My keymaps (from VSCode :())
---
+
+-- Keymaps for Trouble
+-- vim.keymap.set("n", "<leader>xx", function()
+--     require("trouble").toggle()
+-- end)
+-- vim.keymap.set("n", "<leader>xw", function()
+--     require("trouble").toggle "workspace_diagnostics"
+-- end)
+-- vim.keymap.set("n", "<leader>xd", function()
+--     require("trouble").toggle "document_diagnostics"
+-- end)
+-- vim.keymap.set("n", "<leader>xq", function()
+--     require("trouble").toggle "quickfix"
+-- end)
+-- vim.keymap.set("n", "<leader>xl", function()
+--     require("trouble").toggle "loclist"
+-- end)
+-- vim.keymap.set("n", "gR", function()
+--     require("trouble").toggle "lsp_references"
+-- end)
 
 -- Do things without affecting the registers
 keymap.set("n", "x", '"_x')
@@ -137,7 +156,7 @@ keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 keymap.set("n", "<leader>p", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
-keymap.set("n", "<leader>ee", "oif err != nil {<CR>}<Esc>Oreturn err<Esc>")
+-- keymap.set("n", "<leader>ee", "oif err != nil {<CR>}<Esc>Oreturn err<Esc>")
 -- Git worktree
 vim.keymap.set("n", "<leader>gw", function()
     require("telescope").extensions.git_worktree.git_worktrees()
