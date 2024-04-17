@@ -8,24 +8,20 @@ local opts = { noremap = true, silent = true }
 -- My keymaps (from VSCode :())
 
 -- Keymaps for Trouble
--- vim.keymap.set("n", "<leader>xx", function()
---     require("trouble").toggle()
--- end)
--- vim.keymap.set("n", "<leader>xw", function()
---     require("trouble").toggle "workspace_diagnostics"
--- end)
--- vim.keymap.set("n", "<leader>xd", function()
---     require("trouble").toggle "document_diagnostics"
--- end)
--- vim.keymap.set("n", "<leader>xq", function()
---     require("trouble").toggle "quickfix"
--- end)
--- vim.keymap.set("n", "<leader>xl", function()
---     require("trouble").toggle "loclist"
--- end)
--- vim.keymap.set("n", "gR", function()
---     require("trouble").toggle "lsp_references"
--- end)
+-- vim.keymap.set("n", "<leader>xx", function() require("trouble").toggle() end)
+-- vim.keymap.set("n", "<leader>xw", function() require("trouble").toggle("workspace_diagnostics") end)
+-- vim.keymap.set("n", "<leader>xd", function() require("trouble").toggle("document_diagnostics") end)
+-- vim.keymap.set("n", "<leader>xq", function() require("trouble").toggle("quickfix") end)
+-- vim.keymap.set("n", "<leader>xl", function() require("trouble").toggle("loclist") end)
+-- vim.keymap.set("n", "gR", function() require("trouble").toggle("lsp_references") end)
+
+-- Keymaps for Fugitive
+keymap.set("n", "<leader>gs", function()
+    vim.cmd "G"
+end, { desc = "Git Fugitive Status" })
+
+-- Keymap for UndoTree. For that The nvim-treesitter-context Toggle commmand is overridden.
+vim.keymap.set("n", "<leader>ue", vim.cmd.UndotreeToggle, { desc = "Toggle undotree" })
 
 -- Do things without affecting the registers
 keymap.set("n", "x", '"_x')
