@@ -25,7 +25,7 @@ vim.keymap.set("n", "<leader>ue", vim.cmd.UndotreeToggle, { desc = "Toggle undot
 
 -- Do things without affecting the registers
 keymap.set("n", "x", '"_x')
-keymap.set("n", ",p", '"0p')
+-- keymap.set("n", ",p", '"0p')
 keymap.set("n", "<Leader>P", '"0P')
 keymap.set("v", "<Leader>p", '"0p')
 keymap.set("n", "<Leader>c", '"_c')

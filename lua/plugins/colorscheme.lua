@@ -83,6 +83,8 @@ return {
                     -- The right one but we do it changes everything to white and we do not want that.
                     -- GruvboxBlue = { fg = "#c4a7e7" },
                     GruvboxAqua = { fg = "#fabd2f" },
+                    Type = { fg = "#b8bb26" },
+                    Typedef = { fg = "#b8bb26" },
                     -- Operator = { fg = "#8ec07c" },
                     Operator = { fg = "#ffffff" },
                     Function = { fg = "#fabd2f" },
