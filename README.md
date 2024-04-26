@@ -1,2 +1,4 @@
 # kap_vim
-My NeoVim setup - mixing lazyvim, Primeagen and TJ plugins.
+My neovim setup. Special thanks to:
+- @primeagen
+- @TJ DeVries
