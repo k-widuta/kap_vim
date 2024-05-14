@@ -101,6 +101,8 @@ return {
                     { name = "luasnip" },
                     { name = "path" },
                     { name = "github/copilot.vim" },
+                    { name = "vim-dadbod-completion" },
+                    { name = "buffer" },
                 },
             }
         end,
