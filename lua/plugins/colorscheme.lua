@@ -2,6 +2,7 @@ return {
     -- add gruvbox
     {
         "ellisonleao/gruvbox.nvim",
+        lazy = false,
         priority = 1000,
         config = function()
             require("gruvbox").setup {
@@ -94,6 +95,7 @@ return {
                     String = { fg = "#98971a" },
                 },
                 dim_inactive = false,
+                -- Change it to flase if you want the real gruvbox background.
                 transparent_mode = true,
             }
             vim.cmd.colorscheme "gruvbox"

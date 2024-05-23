@@ -37,6 +37,10 @@ vim.opt.updatetime = 50
 
 vim.opt.colorcolumn = "80"
 
+-- Options for autocompletion
+vim.opt.completeopt = { "menu", "menuone", "noselect" }
+vim.opt.shortmess:append "c"
+
 vim.opt.encoding = "utf-8"
 vim.opt.fileencoding = "utf-8"
 

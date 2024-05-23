@@ -1,7 +1,9 @@
 return {
     { -- Autocompletion
         "hrsh7th/nvim-cmp",
-        event = "InsertEnter",
+        -- event = "InsertEnter",
+        lazy = false,
+        priority = 100,
         dependencies = {
             -- Snippet Engine & its associated nvim-cmp source
             {
@@ -25,23 +27,27 @@ return {
                             require("luasnip.loaders.from_vscode").lazy_load()
                         end,
                     },
-                    "github/copilot.vim",
+                    -- "github/copilot.vim",
                 },
             },
             "saadparwaiz1/cmp_luasnip",
-
+            "onsails/lspkind-nvim",
             -- Adds other completion capabilities.
             --  nvim-cmp does not ship with all sources by default. They are split
             --  into multiple repos for maintenance purposes.
             "hrsh7th/cmp-nvim-lsp",
             "hrsh7th/cmp-path",
+            "hrsh7th/cmp-buffer",
         },
         config = function()
             -- See `:help cmp`
+
             local cmp = require "cmp"
             local luasnip = require "luasnip"
             luasnip.config.setup {}
 
+            local lspkind = require "lspkind"
+            lspkind.init {}
             cmp.setup {
                 snippet = {
                     expand = function(args)
@@ -67,7 +73,14 @@ return {
                     -- Accept ([y]es) the completion.
                     --  This will auto-import if your LSP supports it.
                     --  This will expand snippets if the LSP sent a snippet.
-                    ["<C-y>"] = cmp.mapping.confirm { select = true },
+                    ["<C-y>"] = cmp.mapping(
+                        cmp.mapping.confirm {
+
+                            behavior = cmp.ConfirmBehavior.Insert,
+                            select = true,
+                        },
+                        { "i", "c" }
+                    ),
 
                     -- Manually trigger a completion from nvim-cmp.
                     --  Generally you don't need this, because nvim-cmp will display
@@ -98,11 +111,11 @@ return {
                 },
                 sources = {
                     { name = "nvim_lsp" },
-                    { name = "luasnip" },
                     { name = "path" },
+                    { name = "buffer" },
+                    { name = "luasnip" },
                     { name = "github/copilot.vim" },
                     { name = "vim-dadbod-completion" },
-                    { name = "buffer" },
                 },
             }
         end,
